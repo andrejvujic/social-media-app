@@ -31,3 +31,9 @@
 - Dodana već ranije korištena klasa ErrorService i
   vidžet InfoAlert (napisani za
   korištenje u prijašnjim aplikacijama)
+
+📍 v1.0.5
+- Dodan servis za upravljanje fajerbejs storidžem
+  (StorageService)
+
+
