@@ -1,8 +1,13 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:social_media_app/screens/home/explore.dart';
 import 'package:social_media_app/screens/home/following.dart';
+import 'package:social_media_app/screens/home/upload.dart';
 import 'package:social_media_app/screens/home/widgets/home_drawer.dart';
+import 'package:social_media_app/screens/route_builder.dart';
+import 'package:social_media_app/services/database_service.dart';
+import 'package:social_media_app/widgets/loading_placeholder.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -10,6 +15,8 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  final imagePicker = ImagePicker();
+  final db = DatabaseService(uid: FirebaseAuth.instance.currentUser.uid);
   PageController controller;
   int currentPage = 0;
 
@@ -23,6 +30,62 @@ class _HomeState extends State<Home> {
   void dispose() {
     controller.dispose();
     super.dispose();
+  }
+
+  void askForImageSource() {
+    showModalBottomSheet(
+      context: context,
+      builder: (BuildContext context) {
+        return Wrap(
+          children: <Widget>[
+            ListTile(
+              onTap: () => getImage(source: ImageSource.camera),
+              leading: const Icon(
+                Icons.camera_alt_outlined,
+                color: Colors.black,
+                size: 24.0,
+              ),
+              title: const Text(
+                'Slikaj novu fotografiju',
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 16.0,
+                ),
+              ),
+            ),
+            ListTile(
+              onTap: () => getImage(source: ImageSource.gallery),
+              leading: const Icon(
+                Icons.photo_library_outlined,
+                color: Colors.black,
+                size: 24.0,
+              ),
+              title: const Text(
+                'Upotrijebi fotografiju iz galerije',
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 16.0,
+                ),
+              ),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  void getImage({ImageSource source}) async {
+    final PickedFile pickedFile =
+        await imagePicker.getImage(source: source ?? ImageSource.camera);
+
+    if (pickedFile != null) {
+      Navigator.push(
+        context,
+        buildRoute(
+          Upload(pickedFile: pickedFile),
+        ),
+      );
+    }
   }
 
   @override
@@ -40,22 +103,45 @@ class _HomeState extends State<Home> {
       ),
       drawer: HomeDrawer(),
       body: SafeArea(
-        child: Center(
-          child: PageView(
-            physics: ScrollPhysics(),
-            onPageChanged: (int page) => setState(() => currentPage = page),
-            controller: controller,
-            children: [
-              Following(),
-              Explore(),
-            ],
-          ),
+        child: StreamBuilder(
+          stream: db.userData,
+          builder: (BuildContext context, AsyncSnapshot snapshot) {
+            if (!snapshot.hasData) {
+              return Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+
+            final Map<String, dynamic> userData = snapshot.data.data();
+            if (userData == null) {
+              db.addUser(FirebaseAuth.instance.currentUser);
+
+              return LoadingPlaceholder(
+                title: 'Podešavamo vaš profil',
+                subtitle:
+                    'U toku je podešavanje vašeg profila. Ovo neće trajati dugo, molimo vas da sačekate.',
+                showProgressIndicator: true,
+              );
+            }
+
+            return PageView(
+              physics: ScrollPhysics(),
+              onPageChanged: (int page) => setState(() => currentPage = page),
+              controller: controller,
+              children: [
+                Following(),
+                Explore(),
+              ],
+            );
+          },
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
-        onPressed: () => null,
+        onPressed: askForImageSource,
         elevation: 0.0,
+        hoverElevation: 4.0,
+        highlightElevation: 4.0,
         child: Icon(
           Icons.add,
         ),

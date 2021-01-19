@@ -10,3 +10,11 @@
 - Dodan PageView na početni ekran sa ekranom
   za istraživanje i ekranom za korisnike koje
   korinsik prati
+
+📍 v1.0.2
+- Dodana funkcionalnost na FloatingActionButton,
+  sada se pojavi ModalBottomSheet putem kojeg je
+  moguće odabrati izvor slike (galerija ili kamera)
+- Ukoliko korisnik odabere sliku aplikacija ga 
+  odvede na ekran putem kojeg bi trebao da objavi
+  fotografiju
