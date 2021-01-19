@@ -1,3 +1,5 @@
+### 2021
+## Januar
 📍 v1.0.0
 - Applikacija povezana sa fajerbejsom
 - Dodan ekran za prijavljivanje i mogućnost
@@ -18,3 +20,8 @@
 - Ukoliko korisnik odabere sliku aplikacija ga 
   odvede na ekran putem kojeg bi trebao da objavi
   fotografiju
+
+📍 v1.0.3
+- Dizajniran ekran za objavljivanje fotografije
+- Dodani već ranije korišteni vidžeti za unos teksta
+  i tipka (TextInput i SolidButton) 
