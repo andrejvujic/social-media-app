@@ -40,12 +40,12 @@ class HomeDrawer extends StatelessWidget {
             children: <Widget>[
               ListTile(
                 onTap: () => FirebaseAuth.instance.signOut(),
-                leading: Icon(
+                leading: const Icon(
                   Icons.logout,
                   color: Colors.black,
                   size: 24.0,
                 ),
-                title: Text(
+                title: const Text(
                   'Odjavi me',
                   style: TextStyle(
                     color: Colors.black,
