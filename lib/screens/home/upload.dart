@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:social_media_app/widgets/info_alert.dart';
 import 'package:social_media_app/widgets/loading_placeholder.dart';
 import 'package:social_media_app/widgets/solid_button.dart';
 import 'package:social_media_app/widgets/text_input.dart';
@@ -18,7 +19,6 @@ class Upload extends StatefulWidget {
 
 class _UploadState extends State<Upload> {
   final captionController = TextEditingController();
-
   String imagePath = '';
 
   @override
@@ -31,6 +31,18 @@ class _UploadState extends State<Upload> {
   void dispose() {
     captionController.dispose();
     super.dispose();
+  }
+
+  Future<void> uploadImage() async {
+    var imagePath = '';
+
+    if ((imagePath?.length ?? 0) > 0) {
+    } else {
+      InfoAlert.show(context,
+          title: 'Greška',
+          text:
+              'Fotografija koju pokušavate da objavite ne postoji ili je obrisana. Pokušajte ponovo sa nekom drugom fotografijom.');
+    }
   }
 
   Widget errorBuilder(BuildContext context, Object error, StackTrace _) {
@@ -76,6 +88,7 @@ class _UploadState extends State<Upload> {
                 labelText: 'Opis',
               ),
               SolidButton(
+                onPressed: uploadImage,
                 width: MediaQuery.of(context).size.width * 0.90,
                 color: Colors.blue,
                 highlightColor: Colors.white,

@@ -24,4 +24,10 @@
 📍 v1.0.3
 - Dizajniran ekran za objavljivanje fotografije
 - Dodani već ranije korišteni vidžeti za unos teksta
-  i tipka (TextInput i SolidButton) 
+  i tipka (TextInput i SolidButton, napisani za
+  korištenje u prijašnjim aplikacijama) 
+
+📍 v1.0.4
+- Dodana već ranije korištena klasa ErrorService i
+  vidžet InfoAlert (napisani za
+  korištenje u prijašnjim aplikacijama)
