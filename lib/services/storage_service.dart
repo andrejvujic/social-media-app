@@ -4,14 +4,15 @@ import 'package:firebase_storage/firebase_storage.dart';
 class StorageService {
   final storage = FirebaseStorage.instance;
 
-  Future<void> uploadFile({String filePath, String uploadPath}) async =>
+  Future<String> uploadFile({String filePath, String uploadPath}) async =>
       await storage
           .ref(uploadPath)
           .putFile(
             File(filePath),
           )
-          .catchError((e) => e.code);
+          .then((value) async =>
+              await value.storage.ref(uploadPath).getDownloadURL());
 
   Future<String> getFileUrl({String uploadPath}) async =>
-      await storage.ref(uploadPath).getDownloadURL().catchError((e) => e.code);
+      await storage.ref(uploadPath).getDownloadURL();
 }

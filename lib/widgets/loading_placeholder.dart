@@ -6,8 +6,8 @@ class LoadingPlaceholder extends StatelessWidget {
   final Widget progressIndicator;
 
   LoadingPlaceholder(
-      {this.title,
-      this.subtitle,
+      {this.title = '',
+      this.subtitle = '',
       this.showProgressIndicator = false,
       this.progressIndicator});
 

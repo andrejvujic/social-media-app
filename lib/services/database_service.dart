@@ -9,6 +9,8 @@ class DatabaseService {
 
   final CollectionReference users =
       FirebaseFirestore.instance.collection('users');
+  final CollectionReference posts =
+      FirebaseFirestore.instance.collection('posts');
 
   Future<void> addUser(User user) async {
     /// Dodaje novog korisnika u bazu podataka
@@ -22,6 +24,25 @@ class DatabaseService {
 
     await users.doc(uid).set(userData).catchError((e) => print(e.code));
   }
+
+  Future<Map<String, dynamic>> addPost(
+      {String id, String photoUrl, String caption = ''}) async {
+    /// Dodaje novi post u bazu podataka
+    final Map<String, dynamic> postData = {
+      'authorUid': uid,
+      'caption': caption,
+      'id': id,
+      'downloadUrl': photoUrl,
+      'postedOn': Timestamp.now(),
+      'likes': [],
+      'comments': [],
+    };
+
+    await posts.doc(id).set(postData);
+  }
+
+  Future<void> setPostData({String id, Map<String, dynamic> data}) async =>
+      await posts.doc(id).set(data);
 
   Stream<DocumentSnapshot> get userData => users.doc(uid).snapshots();
 }

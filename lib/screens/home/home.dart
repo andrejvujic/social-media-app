@@ -79,13 +79,15 @@ class _HomeState extends State<Home> {
         await imagePicker.getImage(source: source ?? ImageSource.camera);
 
     if (pickedFile != null) {
-      Navigator.push(
+      await Navigator.push(
         context,
         buildRoute(
           Upload(pickedFile: pickedFile),
         ),
       );
     }
+
+    Navigator.pop(context);
   }
 
   @override

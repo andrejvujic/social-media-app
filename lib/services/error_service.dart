@@ -7,6 +7,8 @@ class ErrorService {
         'Pristupn zabranjen. Nemate dozvolu za izvršavanje ove radnje.',
     'storage/unauthorized':
         'Pristupn zabranjen. Nemate dozvolu za izvršavanje ove radnje.',
+    'unauthorized':
+        'Pristupn zabranjen. Nemate dozvolu za izvršavanje ove radnje.',
     'storage/object-not-found': 'Fajl nije pronađen ili je obrisan.',
     'wrong-password': 'Lozinka koju ste unijeli je netačna. Pokušajte ponovo.',
     'weak-password':
