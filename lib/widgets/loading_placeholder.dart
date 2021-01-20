@@ -4,12 +4,15 @@ class LoadingPlaceholder extends StatelessWidget {
   final String title, subtitle;
   final bool showProgressIndicator;
   final Widget progressIndicator;
+  final Widget child;
 
-  LoadingPlaceholder(
-      {this.title = '',
-      this.subtitle = '',
-      this.showProgressIndicator = false,
-      this.progressIndicator});
+  LoadingPlaceholder({
+    this.title = '',
+    this.subtitle = '',
+    this.showProgressIndicator = false,
+    this.progressIndicator,
+    this.child,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -38,6 +41,7 @@ class LoadingPlaceholder extends StatelessWidget {
                   width: 0.0,
                   height: 0.0,
                 ),
+          (child == null) ? Container() : child,
         ],
       ),
     );

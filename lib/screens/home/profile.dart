@@ -1,4 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:social_media_app/screens/home/widgets/profile/profile_info.dart';
+import 'package:social_media_app/screens/home/widgets/profile/profile_posts.dart';
 
 class Profile extends StatefulWidget {
   @override
@@ -6,13 +9,22 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> {
+  final User user = FirebaseAuth.instance.currentUser;
+
+  Map<String, dynamic> postData = {};
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Text(
-          'Profile',
-        ),
+      body: Column(
+        children: <Widget>[
+          ProfileInfo(
+            uid: FirebaseAuth.instance.currentUser.uid,
+          ),
+          ProfilePosts(
+            uid: FirebaseAuth.instance.currentUser.uid,
+          ),
+        ],
       ),
     );
   }

@@ -18,12 +18,17 @@ class App extends StatelessWidget {
       title: 'Socialgram',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
+        appBarTheme: AppBarTheme(
+          color: Colors.blue[900],
+        ),
         fontFamily: 'Poppins-Regular',
         primarySwatch: Colors.blue,
+        primaryColor: Colors.blue[900],
+        accentColor: Colors.yellowAccent[700],
         visualDensity: VisualDensity.adaptivePlatformDensity,
         brightness: Brightness.light,
-        highlightColor: Colors.blue.withOpacity(0.1),
-        splashColor: Colors.blue.withOpacity(0.2),
+        highlightColor: Colors.blue[900].withOpacity(0.1),
+        splashColor: Colors.blue[900].withOpacity(0.2),
       ),
       home: Auth(),
     );

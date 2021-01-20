@@ -16,20 +16,23 @@ class DatabaseService {
     /// Dodaje novog korisnika u bazu podataka
     final Map<String, dynamic> userData = {
       'name': user.displayName,
+      'about': '',
       'email': user.email,
       'photoUrl': user.photoURL,
       'uid': user.uid,
       'joinedOn': Timestamp.now(),
+      'followers': [],
+      'following': [],
     };
 
     await users.doc(uid).set(userData).catchError((e) => print(e.code));
   }
 
-  Future<Map<String, dynamic>> addPost(
+  Future<void> addPost(
       {String id, String photoUrl, String caption = ''}) async {
     /// Dodaje novi post u bazu podataka
     final Map<String, dynamic> postData = {
-      'authorUid': uid,
+      'authorId': uid,
       'caption': caption,
       'id': id,
       'downloadUrl': photoUrl,
@@ -44,5 +47,5 @@ class DatabaseService {
   Future<void> setPostData({String id, Map<String, dynamic> data}) async =>
       await posts.doc(id).set(data);
 
-  Stream<DocumentSnapshot> get userData => users.doc(uid).snapshots();
+  Stream<DocumentSnapshot> get userDataSnaphots => users.doc(uid).snapshots();
 }

@@ -5,7 +5,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:social_media_app/services/database_service.dart';
-import 'package:social_media_app/services/error_service.dart';
 import 'package:social_media_app/services/storage_service.dart';
 import 'package:social_media_app/widgets/info_alert.dart';
 import 'package:social_media_app/widgets/loading_overlay.dart';
@@ -111,7 +110,7 @@ class _UploadState extends State<Upload> {
                 SolidButton(
                   onPressed: uploadImage,
                   width: MediaQuery.of(context).size.width * 0.90,
-                  color: Colors.blue,
+                  color: Theme.of(context).primaryColor,
                   highlightColor: Colors.white,
                   splashColor: Colors.white,
                   child: Row(

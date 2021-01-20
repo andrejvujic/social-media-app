@@ -34,12 +34,7 @@ class _LoadingOverlayState extends State<LoadingOverlay> {
                       color: widget.overlayColor
                           .withOpacity(widget.overlayColorOpacity),
                     ),
-                    widget.progressIndicator ??
-                        CircularProgressIndicator(
-                          valueColor: AlwaysStoppedAnimation<Color>(
-                            Colors.blue,
-                          ),
-                        ),
+                    widget.progressIndicator ?? CircularProgressIndicator(),
                   ],
                 ),
               )

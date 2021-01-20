@@ -1,10 +1,12 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:social_media_app/screens/home/activities.dart';
 import 'package:social_media_app/screens/home/explore.dart';
 import 'package:social_media_app/screens/home/following.dart';
+import 'package:social_media_app/screens/home/profile.dart';
 import 'package:social_media_app/screens/home/upload.dart';
-import 'package:social_media_app/screens/home/widgets/home_drawer.dart';
+import 'package:social_media_app/screens/home/widgets/home/home_drawer.dart';
 import 'package:social_media_app/screens/route_builder.dart';
 import 'package:social_media_app/services/database_service.dart';
 import 'package:social_media_app/widgets/loading_placeholder.dart';
@@ -106,7 +108,7 @@ class _HomeState extends State<Home> {
       drawer: HomeDrawer(),
       body: SafeArea(
         child: StreamBuilder(
-          stream: db.userData,
+          stream: db.userDataSnaphots,
           builder: (BuildContext context, AsyncSnapshot snapshot) {
             if (!snapshot.hasData) {
               return Center(
@@ -133,6 +135,8 @@ class _HomeState extends State<Home> {
               children: [
                 Following(),
                 Explore(),
+                Activities(),
+                Profile(),
               ],
             );
           },
@@ -140,6 +144,8 @@ class _HomeState extends State<Home> {
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
+        backgroundColor: Theme.of(context).accentColor,
+        tooltip: 'Objavi',
         onPressed: askForImageSource,
         elevation: 0.0,
         hoverElevation: 4.0,
@@ -148,36 +154,55 @@ class _HomeState extends State<Home> {
           Icons.add,
         ),
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: currentPage,
-        onTap: (int page) {
-          setState(() => currentPage = page);
-          controller.animateToPage(
-            page,
-            duration: Duration(milliseconds: 200),
-            curve: Curves.easeInOut,
-          );
-        },
-        showSelectedLabels: false,
-        showUnselectedLabels: false,
-        selectedLabelStyle: const TextStyle(fontSize: 0.0),
-        unselectedLabelStyle: const TextStyle(fontSize: 0.0),
-        items: <BottomNavigationBarItem>[
-          const BottomNavigationBarItem(
-            label: '',
-            icon: Icon(
-              Icons.people_alt_outlined,
-              size: 30.0,
+      bottomNavigationBar: Theme(
+        data: ThemeData(
+          splashColor: Colors.transparent,
+          highlightColor: Colors.transparent,
+          fontFamily: 'Poppins-Regular',
+        ),
+        child: BottomNavigationBar(
+          currentIndex: currentPage,
+          onTap: (int page) {
+            setState(() => currentPage = page);
+            controller.animateToPage(
+              page,
+              duration: Duration(milliseconds: 200),
+              curve: Curves.easeInOut,
+            );
+          },
+          showSelectedLabels: false,
+          showUnselectedLabels: false,
+          selectedLabelStyle: const TextStyle(fontSize: 0.0),
+          unselectedLabelStyle: const TextStyle(fontSize: 0.0),
+          unselectedIconTheme: IconThemeData(color: Colors.black, size: 24.0),
+          selectedIconTheme:
+              IconThemeData(color: Theme.of(context).accentColor, size: 30.0),
+          type: BottomNavigationBarType.fixed,
+          items: <BottomNavigationBarItem>[
+            const BottomNavigationBarItem(
+              label: 'Praćenja',
+              icon: Icon(Icons.people_alt_outlined),
             ),
-          ),
-          const BottomNavigationBarItem(
-            label: '',
-            icon: Icon(
-              Icons.explore_outlined,
-              size: 30.0,
+            BottomNavigationBarItem(
+              label: 'Istraži',
+              icon: Container(
+                margin: const EdgeInsets.only(right: 44.0),
+                child: const Icon(Icons.explore_outlined),
+              ),
             ),
-          ),
-        ],
+            BottomNavigationBarItem(
+              label: 'Aktivnosti',
+              icon: Container(
+                margin: const EdgeInsets.only(left: 44.0),
+                child: const Icon(Icons.favorite_border),
+              ),
+            ),
+            BottomNavigationBarItem(
+              label: 'Moj profil',
+              icon: Icon(Icons.settings_outlined),
+            ),
+          ],
+        ),
       ),
     );
   }

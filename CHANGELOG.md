@@ -45,3 +45,23 @@
   korisniku da korisnti aplikaciju dok je neka
   radnja u toku
 
+📍 v1.0.7
+- Dodan ekran za profil i aktivnosti
+- Dodane ikonice za nove ekrane na traku za
+  navigaciju
+- Dodani tultipovi na ikonice na traci za
+  navigaciju
+
+📍 v1.0.8
+- Dizajniran ekran za profil
+- Prikazuje se broj objava, pratilaca i korisnika
+  koje korisnik prati
+- Ukoliko je profil tuđi prikazuje se tipka
+  zaprati/otprati u zavisnosti od toga da
+  li korisnik prati vlasnika profila
+- Ukoliko profil nije tuđi prikazuje se tipka
+  za mijenjanje profila
+- Prikazuju se objave korisnika od najnovijih ka
+  najstrarijim
+- Promijenjena primarna boja aplikacije na
+  Colors.blue[900], a akcentna na Colors.yellow[700]

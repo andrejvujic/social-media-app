@@ -10,12 +10,12 @@ class HomeDrawer extends StatelessWidget {
         padding: const EdgeInsets.all(0.0),
         children: <Widget>[
           DrawerHeader(
-            decoration: const BoxDecoration(
-              color: Colors.blue,
+            decoration: BoxDecoration(
+              color: Theme.of(context).primaryColor,
             ),
             child: ListTile(
               leading: CircleAvatar(
-                backgroundColor: Colors.blue[600],
+                backgroundColor: Colors.grey,
                 backgroundImage: CachedNetworkImageProvider(
                   FirebaseAuth.instance.currentUser.photoURL,
                 ),
