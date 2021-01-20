@@ -77,8 +77,12 @@ class _HomeState extends State<Home> {
   }
 
   void getImage({ImageSource source}) async {
-    final PickedFile pickedFile =
-        await imagePicker.getImage(source: source ?? ImageSource.camera);
+    final PickedFile pickedFile = await imagePicker.getImage(
+      maxHeight: 500,
+      maxWidth: 500,
+      source: source ?? ImageSource.camera,
+      imageQuality: 50,
+    );
 
     if (pickedFile != null) {
       await Navigator.push(
