@@ -98,4 +98,9 @@
 - Dodano upozorenje na brisanje objave, sada će objava
   biti obrisana tek kada korisnik pritisne na tipku da,
   na prikazanom upozorenju
-  
+
+📍 v1.1.0+4
+- Dodan ekran za gledanje objave u punoj formi, ovaj ekran
+  omogućava korisniku da pogelda osnovne informacije o
+  određenoj objavi, označi da mu se objava sviđa (ili ne)
+  i ostavi komentar

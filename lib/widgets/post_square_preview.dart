@@ -31,7 +31,7 @@ class _PostSquarePreviewState extends State<PostSquarePreview> {
   Future<void> showPost() async => await Navigator.push(
         context,
         buildRoute(
-          PostFullPreview(),
+          PostFullPreview(postData: widget.postData),
           begin: Offset(0.0, 1.0),
         ),
       );
@@ -135,6 +135,7 @@ class _PostSquarePreviewState extends State<PostSquarePreview> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onLongPressStart: onLongPressStart,
+      onTap: showPost,
       child: Container(
         decoration: BoxDecoration(
           border: Border.all(width: 0.25),
