@@ -8,23 +8,35 @@ class Profile extends StatefulWidget {
   _ProfileState createState() => _ProfileState();
 }
 
-class _ProfileState extends State<Profile> {
+class _ProfileState extends State<Profile> with AutomaticKeepAliveClientMixin {
   final User user = FirebaseAuth.instance.currentUser;
 
-  Map<String, dynamic> postData = {};
+  ProfileInfo profileInfo = ProfileInfo(
+    uid: FirebaseAuth.instance.currentUser.uid,
+  );
+  ProfilePosts profilePosts = ProfilePosts(
+    uid: FirebaseAuth.instance.currentUser.uid,
+  );
+
+  @override
+  bool get wantKeepAlive => true;
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
+
     return Scaffold(
-      body: Column(
-        children: <Widget>[
-          ProfileInfo(
-            uid: FirebaseAuth.instance.currentUser.uid,
-          ),
-          ProfilePosts(
-            uid: FirebaseAuth.instance.currentUser.uid,
-          ),
-        ],
+      body: RefreshIndicator(
+        onRefresh: () async {
+          profileInfo.reset?.call();
+          profilePosts.reset?.call();
+        },
+        child: Column(
+          children: <Widget>[
+            profileInfo,
+            profilePosts,
+          ],
+        ),
       ),
     );
   }

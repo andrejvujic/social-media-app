@@ -24,7 +24,7 @@ class _HomeState extends State<Home> {
 
   @override
   void initState() {
-    controller = PageController();
+    controller = PageController(keepPage: true);
     super.initState();
   }
 

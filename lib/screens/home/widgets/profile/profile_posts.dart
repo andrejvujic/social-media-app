@@ -11,6 +11,8 @@ class ProfilePosts extends StatefulWidget {
   _ProfilePostsState createState() => _ProfilePostsState();
 
   final String uid;
+  Function reset = () => null;
+
   ProfilePosts({
     this.uid,
   });
@@ -23,6 +25,7 @@ class _ProfilePostsState extends State<ProfilePosts> {
   @override
   void initState() {
     db = DatabaseService(uid: widget.uid);
+    widget.reset = () => setState(() => userPosts = null);
     super.initState();
   }
 
@@ -32,8 +35,6 @@ class _ProfilePostsState extends State<ProfilePosts> {
         .where('authorId', isEqualTo: widget.uid)
         .get()
         .then((value) => value.docs);
-
-    print(posts);
 
     setState(() => userPosts = posts ?? []);
   }

@@ -8,6 +8,8 @@ import 'package:social_media_app/widgets/solid_button.dart';
 
 class ProfileInfo extends StatefulWidget {
   final String uid;
+  Function reset = () => null;
+
   ProfileInfo({
     @required this.uid,
   });
@@ -18,12 +20,13 @@ class ProfileInfo extends StatefulWidget {
 
 class _ProfileInfoState extends State<ProfileInfo> {
   DatabaseService db;
-  Map<String, dynamic> userData = {};
+  Map<String, dynamic> userData;
 
   @override
   void initState() {
-    super.initState();
     db = DatabaseService(uid: widget.uid);
+    widget.reset = () => setState(() => userData = null);
+    super.initState();
   }
 
   Future<void> getUserData() async {
@@ -39,15 +42,13 @@ class _ProfileInfoState extends State<ProfileInfo> {
 
   @override
   Widget build(BuildContext context) {
-    WidgetsBinding.instance.addPostFrameCallback(
-      (_) {
-        if (userData.length == 0) {
-          getUserData();
-        }
-      },
-    );
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (userData == null) {
+        getUserData();
+      }
+    });
 
-    return (userData.length > 0)
+    return ((userData?.length ?? 0) > 0)
         ? Container(
             margin: EdgeInsets.all(8.0),
             child: Column(
@@ -70,6 +71,7 @@ class _ProfileInfoState extends State<ProfileInfo> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: <Widget>[
+                              /*
                               Column(
                                 children: <Widget>[
                                   Text('Objave'),
@@ -82,6 +84,7 @@ class _ProfileInfoState extends State<ProfileInfo> {
                                   ),
                                 ],
                               ),
+                              */
                               Column(
                                 children: <Widget>[
                                   Text('Pratioci'),

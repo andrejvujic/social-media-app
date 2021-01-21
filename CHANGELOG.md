@@ -65,3 +65,9 @@
   najstrarijim
 - Promijenjena primarna boja aplikacije na
   Colors.blue[900], a akcentna na Colors.yellow[700]
+
+📍 v1.0.9
+- Ekran za profil sada čuva stejt i kada nije
+  u fokusu
+- Dodan RefreshIndicator koji osvježava podatke
+  o profilu
