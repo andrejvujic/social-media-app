@@ -49,7 +49,8 @@ class _UploadState extends State<Upload> {
       final String photoUrl = await storage.uploadFile(
           filePath: imagePath, uploadPath: 'posts/$id');
 
-      await db.addPost(id: id, photoUrl: photoUrl, caption: '');
+      await db.addPost(
+          id: id, photoUrl: photoUrl, caption: captionController.text);
 
       setState(() => isLoading = false);
       Navigator.pop(context);

@@ -71,3 +71,8 @@
   u fokusu
 - Dodan RefreshIndicator koji osvježava podatke
   o profilu
+
+📍 v1.1.0+0
+- Uneseni opis se sada čuva zajedno sa ostalim
+  podacima na bazi podataka
+  
