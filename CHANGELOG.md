@@ -87,3 +87,9 @@
 - Dodana funkcija za brisanje objave u
   DatabaseService klasu
 
+📍 v1.1.0+2
+- Dodan već prije korišten fajl koji sadrži klasu
+  YesNoAlert, koja prikazuje alert sa opcijama za
+  da i ne, moguće je dati onYesPressed i onNoPressed
+  parametre koji budu pozvani kada odgovarajuća tipka
+  bude pritisnuta
