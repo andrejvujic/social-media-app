@@ -1,5 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:social_media_app/services/storage_service.dart';
 
 class DatabaseService {
   final String uid;
@@ -42,6 +44,12 @@ class DatabaseService {
     };
 
     await posts.doc(id).set(postData);
+  }
+
+  Future<void> deletePost({String id}) async {
+    /// Briše objavu iz baze podataka
+    await FirebaseStorage.instance.ref('posts/$id').delete();
+    await posts.doc(id).delete();
   }
 
   Future<void> setPostData({String id, Map<String, dynamic> data}) async =>

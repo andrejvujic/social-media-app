@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 
-Route buildRoute(Widget _child) {
+Route buildRoute(
+  Widget child, {
+  Offset begin = const Offset(1.0, 0.0),
+}) {
   return PageRouteBuilder(
-    pageBuilder: (context, animation, secondaryAnimation) => _child,
-    transitionsBuilder: (context, animation, secondaryAnimation, _child) {
-      final begin = Offset(1.0, 0.0);
+    pageBuilder: (context, animation, secondaryAnimation) => child,
+    transitionsBuilder: (context, animation, secondaryAnimation, child) {
       final end = Offset.zero;
       final curve = Curves.ease;
 
@@ -17,7 +19,7 @@ Route buildRoute(Widget _child) {
 
       return SlideTransition(
         position: animation.drive(tween),
-        child: _child,
+        child: child,
       );
     },
   );

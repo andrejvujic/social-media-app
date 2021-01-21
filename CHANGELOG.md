@@ -75,4 +75,15 @@
 📍 v1.1.0+0
 - Uneseni opis se sada čuva zajedno sa ostalim
   podacima na bazi podataka
-  
+
+📍 v1.1.0+1
+- Dodan Menu koji se prikazuje kada se dugo
+  zadrži na PostSquarePreview sa opcijama
+  za brisanje i prikazivanje objave u punom
+  prikazu, takođe se prikazuje i broj lajkova
+  i komentara
+- Dodana opcija za proizvoljan početni položaj
+  za buildRoute funkciju
+- Dodana funkcija za brisanje objave u
+  DatabaseService klasu
+

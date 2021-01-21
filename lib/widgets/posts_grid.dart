@@ -1,6 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:social_media_app/widgets/post_square_preview.dart';
 
 class PostsGrid extends StatefulWidget {
   @override
@@ -19,21 +21,9 @@ class _PostsGridState extends State<PostsGrid> {
       crossAxisCount: 3,
       children: List.generate(
         widget.posts.length,
-        (int index) {
-          return Container(
-            decoration: BoxDecoration(
-              border: Border.all(width: 0.25),
-            ),
-            margin: EdgeInsets.all(2.5),
-            child: CachedNetworkImage(
-              fit: BoxFit.cover,
-              imageUrl: widget.posts[index].data()['downloadUrl'],
-              placeholder: (BuildContext context, String _) => Center(
-                child: CircularProgressIndicator(),
-              ),
-            ),
-          );
-        },
+        (int index) => PostSquarePreview(
+          postData: widget.posts[index].data(),
+        ),
       ),
     );
   }
