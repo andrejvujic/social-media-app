@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:social_media_app/screens/route_builder.dart';
 import 'package:social_media_app/services/database_service.dart';
 import 'package:social_media_app/widgets/post_full_preview.dart';
+import 'package:social_media_app/widgets/yes_no_alert.dart';
 
 class PostSquarePreview extends StatefulWidget {
   @override
@@ -18,8 +19,14 @@ class PostSquarePreview extends StatefulWidget {
 class _PostSquarePreviewState extends State<PostSquarePreview> {
   final db = DatabaseService(uid: FirebaseAuth.instance.currentUser.uid);
 
-  Future<void> deletePost() async =>
-      await db.deletePost(id: widget.postData['id']);
+  Future<void> deletePost() async => YesNoAlert.show(
+        context,
+        title: 'Upozorenje',
+        text:
+            'Da li ste sigurni da želite da obrišete ovu objavu? Nećete je moći vratiti.',
+        onYesPressed: () async =>
+            await db.deletePost(id: widget.postData['id']),
+      );
 
   Future<void> showPost() async => await Navigator.push(
         context,

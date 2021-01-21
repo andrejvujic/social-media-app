@@ -93,3 +93,9 @@
   da i ne, moguće je dati onYesPressed i onNoPressed
   parametre koji budu pozvani kada odgovarajuća tipka
   bude pritisnuta
+
+📍 v1.1.0+3
+- Dodano upozorenje na brisanje objave, sada će objava
+  biti obrisana tek kada korisnik pritisne na tipku da,
+  na prikazanom upozorenju
+  
